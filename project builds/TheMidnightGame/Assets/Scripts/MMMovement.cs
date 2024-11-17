@@ -21,6 +21,14 @@ public class MMMovement : MonoBehaviour
     }
 
     /// <summary>
+    /// Reset's the Midnight Man's NevMeshAgent's path, stopping it's movement
+    /// </summary>
+    public void CancelPath()
+    {
+        agent.ResetPath();
+    }
+
+    /// <summary>
     /// Sets the Midnight Man's position to a given Vector3
     /// </summary>
     /// <param name="destination"></param>
