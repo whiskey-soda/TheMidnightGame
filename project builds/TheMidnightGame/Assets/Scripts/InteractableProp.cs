@@ -9,8 +9,7 @@ public class InteractableProp : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        prompt = GetComponentInChildren<TextMeshPro>(true).gameObject;
-        if (prompt.activeSelf) { prompt.SetActive(false); }
+        prompt = transform.parent.GetComponentInChildren<TextMeshPro>(true).gameObject;
     }
 
     void ShowPrompt()
