@@ -18,6 +18,8 @@ public class InteractablePrompt : MonoBehaviour
 
     private void Awake()
     {
+        //NOTE: prompt object should be active on start so it can get refs and then hide itself.
+        //DO NOT DISABLE PROMPT OBJECT IN PREFAB
         rectTransform = GetComponent<RectTransform>();
         propCollider = transform.parent.GetComponentInChildren<Collider>();
 
