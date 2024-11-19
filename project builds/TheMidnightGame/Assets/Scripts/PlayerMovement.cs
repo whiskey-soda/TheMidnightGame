@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         movementVector.y = 0;
         movementVector.Normalize();
 
-        controller.Move(movementVector * moveSpeed * Time.deltaTime);
+        //no deltatime because simplemove is framerate independent! :)
+        controller.SimpleMove(movementVector * moveSpeed);
     }
 }
