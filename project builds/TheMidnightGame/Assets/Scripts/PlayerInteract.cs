@@ -19,6 +19,14 @@ public class PlayerInteract : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            interactionTarget = null;
+        }
+    }
+
     public void OnInteract()
     {
 
