@@ -5,6 +5,8 @@ public class InteractableProp : MonoBehaviour
 {
 
     GameObject prompt;
+    public enum ItemType { Match, Candle, Lighter, Paper, Salt };
+    public ItemType type;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
