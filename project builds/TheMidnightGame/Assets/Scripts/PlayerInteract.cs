@@ -76,6 +76,7 @@ public class PlayerInteract : MonoBehaviour
         if (other.CompareTag("Interactable"))
         {
             items.Add(other.gameObject);
+            interactionTarget = other.GetComponent<InteractableProp>();
         }
     }
 
@@ -84,31 +85,26 @@ public class PlayerInteract : MonoBehaviour
         if (other.CompareTag("Interactable"))
         {
             items.Remove(other.gameObject);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Interactable"))
-        {
             interactionTarget = null;
         }
     }
 
     public void OnInteract()
     {
-
         if (closestItem != null)
         {
-            //InteractableProp interaction = closestItem.GetComponent<InteractableProp>();
-            //interaction.ProcessInteraction();
+            InteractableProp interactionScript = closestItem.GetComponent<InteractableProp>();
+            if (interactionScript.interactionType == InteractableProp.InteractionType.Item)
+            {
+                //InteractableProp interaction = closestItem.GetComponent<InteractableProp>();
+                //interaction.ProcessInteraction();
 
-            playerInventory.AddItem(closestItem);
+                playerInventory.AddItem(closestItem);
+            }
+            else if (interactionScript.interactionType == InteractableProp.InteractionType.Environment)
+            {
+                interactionScript.ProcessInteraction();
+            }
         }
-    }
-
-    public void AddItemToInventory()
-    {
-
     }
 }

@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 497398409127894756}
   - component: {fileID: 8325641966784498407}
   - component: {fileID: 5437814925699008233}
+  - component: {fileID: 1557010927264156122}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -415,6 +416,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
+--- !u!114 &1557010927264156122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2454321870563440067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18bbab5b1b12c9848bdc4bd742a94ea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: []
+  equippedItem:
+    slotType: 5
+    item: {fileID: 0}
+    quantity: 0
+  currentSlot: 0
+  maxSlot: 0
+  blankSlot:
+    slotType: 0
+    item: {fileID: 0}
+    quantity: 0
 --- !u!1 &4584564164084879188
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,8 +491,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 2}
-  m_Center: {x: 0, y: 0, z: 1}
+  m_Size: {x: 1, y: 1.19, z: 4}
+  m_Center: {x: 0, y: 0, z: 2}
 --- !u!114 &4711288049079258380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,3 +505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f621c5b928ee24b88e50707db17192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionTarget: {fileID: 0}
+  items: []
+  player: {fileID: 0}
+  closestItem: {fileID: 0}
+  playerInventory: {fileID: 0}
