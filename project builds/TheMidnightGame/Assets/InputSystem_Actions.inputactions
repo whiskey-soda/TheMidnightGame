@@ -97,12 +97,12 @@
                 },
                 {
                     "name": "Use",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "b1d9ee3f-4ed6-4510-8a7a-064e0548c249",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [

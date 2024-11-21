@@ -10,7 +10,7 @@ public class WorldItem : InteractableProp
     public override void ProcessInteraction()
     {
         //adds item to player inventory and destroys world version of the item
-        PlayerInventory.instance.items.Add(inventoryItem);
+        PlayerInventory.instance.AddItemToInventory(inventoryItem);
         Destroy(transform.parent.gameObject);
     }
 

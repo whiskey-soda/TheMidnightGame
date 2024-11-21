@@ -5,10 +5,6 @@ public class InteractableProp : MonoBehaviour
 {
 
     GameObject prompt;
-    public enum InteractionType { Environment, Item }
-    public InteractionType interactionType;
-    public enum ItemType { Match, Candle, Lighter, Paper, Salt, None };
-    public ItemType type;
 
     protected virtual void Awake()
     {
@@ -25,6 +21,7 @@ public class InteractableProp : MonoBehaviour
         prompt.SetActive(false);
     }
 
+    // this gets overwritten by derived classes
     public virtual void ProcessInteraction()
     {
         Debug.Log("Interaction detected");
