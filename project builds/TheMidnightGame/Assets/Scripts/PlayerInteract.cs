@@ -8,6 +8,13 @@ public class PlayerInteract : MonoBehaviour
 {
     List<InteractableProp> interactablesInRange = new List<InteractableProp>();
 
+    private void Update()
+    {
+        // removes all null objects from the list
+        // null objects appear when an item is destroyed while in range (like when picking worlditems up)
+        interactablesInRange.RemoveAll(x => !x);
+    }
+
     public void OnInteract()
     {
 

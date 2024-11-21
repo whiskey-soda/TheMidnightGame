@@ -69,6 +69,8 @@ public class PlayerInventory : MonoBehaviour
     public void AddItemToInventory(InventoryItem item)
     {
         items.Add(item);
+
+        InventoryUI.instance.UpdateInventoryHUD();
     }
 
     public void RemoveItemFromInventory(InventoryItem item)
@@ -80,6 +82,8 @@ public class PlayerInventory : MonoBehaviour
         {
             currentSlotIndex = items.Count() - 1;
         }
+
+        InventoryUI.instance.UpdateInventoryHUD();
     }
 
 }
