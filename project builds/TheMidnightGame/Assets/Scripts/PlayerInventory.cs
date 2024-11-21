@@ -7,11 +7,26 @@ using UnityEngine.Windows;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] public List<InventorySlot> inventory;
+    [SerializeField] public List<InventoryItem> items;
     [SerializeField] public InventorySlot equippedItem;
     [SerializeField] int currentSlot;
     [SerializeField] int maxSlot;
     [SerializeField] InventorySlot blankSlot;
+
+    public static PlayerInventory instance;
+
+    private void Awake()
+    {
+        //singleton code
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     private void Start()
     {
@@ -20,7 +35,7 @@ public class PlayerInventory : MonoBehaviour
         blankSlot.item = null;
         equippedItem = blankSlot;
     }
-
+    /*
     public void AddItem(GameObject item)
     {
         InteractableProp itemScript = item.GetComponent<InteractableProp>();
@@ -28,9 +43,9 @@ public class PlayerInventory : MonoBehaviour
         int tempItemID = 0;
         int itemID = 0;
         
-        if (inventory.Count > 0)
+        if (items.Count > 0)
         {
-            foreach(InventorySlot slot in inventory)
+            foreach(InventoryItem slot in items)
             {
                 if(slot.slotType == itemScript.type)
                 {
@@ -42,7 +57,7 @@ public class PlayerInventory : MonoBehaviour
 
             if(slotFound == true)
             {
-                inventory[itemID].quantity += 1;
+                items[itemID].quantity += 1;
             }
             else
             {
@@ -53,7 +68,7 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.Log("interact");
             CreateSlot(item);
-            equippedItem = inventory[0];
+            equippedItem = items[0];
         }
     }
 
@@ -64,22 +79,22 @@ public class PlayerInventory : MonoBehaviour
         slot.slotType = itemScript.type;
         slot.item = item;
         slot.quantity = 1;
-        inventory.Add(slot);
-        maxSlot = inventory.Count;
+        items.Add(slot);
+        maxSlot = items.Count;
     }
 
     public void DeleteSlot(InventorySlot chosenSlot)
     {
-        inventory.Remove(chosenSlot);
+        items.Remove(chosenSlot);
         DetermineCurrentSlot();
         maxSlot -= 1;
-        if (inventory.Count <= 0)
+        if (items.Count <= 0)
         {
             equippedItem = blankSlot;
         }
         else
         {
-            equippedItem = inventory[currentSlot];
+            equippedItem = items[currentSlot];
         }
     }
     
@@ -90,7 +105,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void EquipSlot(InputValue input)
     {
-        if (inventory.Count > 0)
+        if (items.Count > 0)
         {
             if (input.Get<float>() > 0)
             {
@@ -115,7 +130,7 @@ public class PlayerInventory : MonoBehaviour
                 }
             }
 
-            equippedItem = inventory[currentSlot];
+            equippedItem = items[currentSlot];
         }
         else
         {
@@ -125,7 +140,7 @@ public class PlayerInventory : MonoBehaviour
 
     void OnUse(InputValue input)
     {
-        if (inventory.Count > 0)
+        if (items.Count > 0)
         {
             if (input.isPressed)
             {
@@ -140,13 +155,13 @@ public class PlayerInventory : MonoBehaviour
 
     void UseItem()
     {
-        InteractableProp itemScript = inventory[currentSlot].item.GetComponent<InteractableProp>();
+        InteractableProp itemScript = items[currentSlot].item.GetComponent<InteractableProp>();
         itemScript.ProcessInteraction();
-        inventory[currentSlot].quantity -= 1;
+        items[currentSlot].quantity -= 1;
 
-        if (inventory[currentSlot].quantity <= 0)
+        if (items[currentSlot].quantity <= 0)
         {
-            DeleteSlot(inventory[currentSlot]);
+            DeleteSlot(items[currentSlot]);
         }
     }
 
@@ -158,6 +173,7 @@ public class PlayerInventory : MonoBehaviour
             currentSlot -= 1;
         }
     }
+    */
 }
 
 [System.Serializable]

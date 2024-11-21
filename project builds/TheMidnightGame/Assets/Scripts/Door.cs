@@ -14,8 +14,10 @@ public class Door : InteractableProp
 
     DoorState doorState = DoorState.closed;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         closedAngle = transform.parent.rotation;
         openAngle = Quaternion.Euler(transform.parent.rotation.eulerAngles + new Vector3(0, maxOpenRotation, 0));
     }

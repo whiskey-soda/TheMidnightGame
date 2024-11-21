@@ -1,109 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
-    InteractableProp interactionTarget;
-    [SerializeField]
-    List<GameObject> items;
-    public GameObject closestItem;
-    public PlayerInventory inventory;
+    List<InteractableProp> interactablesInRange = new List<InteractableProp>();
 
-    private void Awake()
+    public void OnInteract()
     {
-        inventory = GetComponentInParent<PlayerInventory>();
-    }
 
-    public void Update()
-    {
-        if (items.Count > 0)
+        if (interactablesInRange.Any())
         {
-            SortClosestObject();
+            GetClosestInteractable().ProcessInteraction();
         }
-        else
-        {
-            closestItem = null;
-        }
+
     }
 
-    void InteractWithTarget()
+    InteractableProp GetClosestInteractable()
     {
-        interactionTarget.ProcessInteraction();
-    }
-
-    void SortClosestObject()
-    {
-        float lastClosestDistance;
-        foreach(GameObject item in items)
+        InteractableProp closestInteractable = null;
+        float closestDistance = 0;
+        foreach (InteractableProp interactable in interactablesInRange)
         {
-            //gets the list length and sets what the last item is to infinity inorder to ensure no item is bigger than the initial closest item
-            int itemLength = items.Count;
-            lastClosestDistance = Mathf.Infinity;
+            float distanceToProp = Vector3.Distance(transform.position, interactable.transform.position);
 
-            //goes through each interactable and determines the closest interactable
-            for (int i = 0; i < itemLength; i++)
+            if (closestInteractable == null
+                || distanceToProp < closestDistance)
             {
-                //triangulates the actual closest distance using pythag theorum
-                Vector3 distanceFromPlayer = items[i].transform.position - transform.parent.position;
-                float distance;
-                distance = CalculateDistance(distanceFromPlayer);
-
-                //if the current distance is less then the last item then it is the closest
-                if (distance < lastClosestDistance)
-                {
-                    
-                    closestItem = items[i];
-                    lastClosestDistance = distance;
-                }
+                closestInteractable = interactable;
+                closestDistance = distanceToProp;
             }
-            lastClosestDistance = Mathf.Infinity;
         }
-    }
 
-    public float CalculateDistance(Vector3 distance)
-    {
-        float pythagDistance;
-        pythagDistance = Mathf.Sqrt((distance.x * distance.x) + (distance.y * distance.y) + (distance.z * distance.z));
+        return closestInteractable;
 
-        return pythagDistance;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Interactable"))
+        // if interactable is not in list, add interactable to list of interactables in range
+        InteractableProp interactableScript = other.GetComponent<InteractableProp>();
+        if (interactableScript != null
+            && !interactablesInRange.Contains(interactableScript))
         {
-            items.Add(other.gameObject);
-            interactionTarget = other.GetComponent<InteractableProp>();
+            interactablesInRange.Add(interactableScript);
         }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Interactable"))
+        // if interactable is in list, remove interactable from list of interactables in range
+        InteractableProp interactableScript = other.GetComponent<InteractableProp>();
+        if (interactableScript != null
+            && interactablesInRange.Contains(interactableScript))
         {
-            items.Remove(other.gameObject);
-            interactionTarget = null;
+            interactablesInRange.Remove(interactableScript);
         }
     }
 
-    public void OnInteract()
-    {
-        if (closestItem != null)
-        {
-            InteractableProp interactionScript = closestItem.GetComponent<InteractableProp>();
-            if (interactionScript.interactionType == InteractableProp.InteractionType.Item)
-            {
-                //InteractableProp interaction = closestItem.GetComponent<InteractableProp>();
-                //interaction.ProcessInteraction();
 
-                inventory.AddItem(closestItem);
-            }
-            else if (interactionScript.interactionType == InteractableProp.InteractionType.Environment)
-            {
-                interactionScript.ProcessInteraction();
-            }
-        }
-    }
 }

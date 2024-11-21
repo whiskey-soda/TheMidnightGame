@@ -10,8 +10,7 @@ public class InteractableProp : MonoBehaviour
     public enum ItemType { Match, Candle, Lighter, Paper, Salt, None };
     public ItemType type;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected virtual void Awake()
     {
         prompt = transform.parent.GetComponentInChildren<InteractablePrompt>(true).gameObject;
     }
