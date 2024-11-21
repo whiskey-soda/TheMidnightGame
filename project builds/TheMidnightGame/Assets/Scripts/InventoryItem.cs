@@ -1,7 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu]
-public class InventoryItem : ScriptableObject
+public class InventoryItem : MonoBehaviour
 {
 
     [SerializeField] string itemName;
