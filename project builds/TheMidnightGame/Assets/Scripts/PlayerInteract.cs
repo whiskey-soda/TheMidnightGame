@@ -5,19 +5,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
-    [SerializeField]
     InteractableProp interactionTarget;
     [SerializeField]
     List<GameObject> items;
-    public GameObject player;
     public GameObject closestItem;
-    public PlayerInventory playerInventory;
+    public PlayerInventory inventory;
 
-    public void Start()
+    private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerInventory = player.GetComponent<PlayerInventory>();
+        inventory = GetComponentInParent<PlayerInventory>();
     }
+
     public void Update()
     {
         if (items.Count > 0)
@@ -29,6 +27,7 @@ public class PlayerInteract : MonoBehaviour
             closestItem = null;
         }
     }
+
     void InteractWithTarget()
     {
         interactionTarget.ProcessInteraction();
@@ -47,7 +46,7 @@ public class PlayerInteract : MonoBehaviour
             for (int i = 0; i < itemLength; i++)
             {
                 //triangulates the actual closest distance using pythag theorum
-                Vector3 distanceFromPlayer = items[i].transform.position - player.transform.position;
+                Vector3 distanceFromPlayer = items[i].transform.position - transform.parent.position;
                 float distance;
                 distance = CalculateDistance(distanceFromPlayer);
 
@@ -99,7 +98,7 @@ public class PlayerInteract : MonoBehaviour
                 //InteractableProp interaction = closestItem.GetComponent<InteractableProp>();
                 //interaction.ProcessInteraction();
 
-                playerInventory.AddItem(closestItem);
+                inventory.AddItem(closestItem);
             }
             else if (interactionScript.interactionType == InteractableProp.InteractionType.Environment)
             {
