@@ -48,14 +48,15 @@ public class InventoryUI : MonoBehaviour
 
         items.Clear();
 
-        // add hud element for all items
+        // creates + configures hud element for all items
         foreach (InventoryItem item in PlayerInventory.instance.items)
         {
+            //changes name of object in hierarchy to match the name from the item script
+            GameObject uiItemObject = Instantiate(HUDItemPrefab, transform);
+            uiItemObject.name = $"{item.itemName} (HUD Item)";
 
-            GameObject newHUDItem = Instantiate(HUDItemPrefab, transform);
-            newHUDItem.name = $"{item.itemName} (HUD Item)";
 
-            HUDItem HUDItemScript = newHUDItem.GetComponent<HUDItem>();
+            HUDItem HUDItemScript = uiItemObject.GetComponent<HUDItem>();
             HUDItemScript.SetText(item.itemName);
 
             items.Add(HUDItemScript);

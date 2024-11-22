@@ -42,6 +42,9 @@ public class PlayerInventory : MonoBehaviour
     {
         if (items.Any())
         {
+            int oldEquippedItemIndex = currentSlotIndex;
+            bool equippedItemChanged = false;
+
             // if trying to go to next slot
             if (input.Get<float>() < 0)
             {
@@ -49,6 +52,7 @@ public class PlayerInventory : MonoBehaviour
                 if (currentSlotIndex > 0)
                 {
                     currentSlotIndex--;
+                    equippedItemChanged = true;
                 }
             }
             // if trying to go to previous slot
@@ -58,10 +62,16 @@ public class PlayerInventory : MonoBehaviour
                 if (currentSlotIndex < items.Count() - 1)
                 {
                     currentSlotIndex++;
+                    equippedItemChanged = true;
                 }
             }
 
-            EquipSlot(currentSlotIndex);
+            if (equippedItemChanged)
+            {
+                items[oldEquippedItemIndex].Hide();
+                EquipSlot(currentSlotIndex);
+            }
+
         }
     }
 
@@ -69,6 +79,7 @@ public class PlayerInventory : MonoBehaviour
     {
         currentSlotIndex = slotIndex;
         equippedItem = items[slotIndex];
+        items[slotIndex].Show();
 
         InventoryUI.instance.UpdateEquippedItem();
     }
