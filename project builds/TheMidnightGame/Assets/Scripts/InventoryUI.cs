@@ -28,9 +28,6 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateEquippedItem()
     {
-        //this code SUUUUCKS but i will update it later when we have the inventory visuals finalized
-        items.Clear();
-        items = GetComponentsInChildren<HUDItem>().ToList();
 
         foreach (HUDItem item in items)
         {
@@ -49,6 +46,8 @@ public class InventoryUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        items.Clear();
+
         // add hud element for all items
         foreach (InventoryItem item in PlayerInventory.instance.items)
         {
@@ -58,6 +57,8 @@ public class InventoryUI : MonoBehaviour
 
             HUDItem HUDItemScript = newHUDItem.GetComponent<HUDItem>();
             HUDItemScript.SetText(item.itemName);
+
+            items.Add(HUDItemScript);
         }
 
         UpdateEquippedItem();

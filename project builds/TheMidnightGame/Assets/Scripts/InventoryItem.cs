@@ -4,7 +4,7 @@ public class InventoryItem : MonoBehaviour
 {
     public string itemName;
 
-    public void Use()
+    public virtual void Use()
     {
         Debug.Log($"{itemName} has been used");
     }
