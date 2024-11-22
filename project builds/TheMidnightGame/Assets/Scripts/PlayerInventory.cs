@@ -8,9 +8,14 @@ using UnityEngine.Windows;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [Header("CONFIG")]
+    [SerializeField] Transform heldItemTransform;
+
+
+    [Header("DEBUG")]
     public List<InventoryItem> items;
     public InventoryItem equippedItem;
-    int currentSlotIndex;
+    public int currentSlotIndex;
 
     public static PlayerInventory instance;
 
@@ -64,17 +69,24 @@ public class PlayerInventory : MonoBehaviour
     {
         currentSlotIndex = slotIndex;
         equippedItem = items[slotIndex];
+
+        InventoryUI.instance.UpdateEquippedItem();
     }
 
-    public void AddItemToInventory(InventoryItem item)
+    public void AddItemToInventory(ItemData itemData)
     {
-        items.Add(item);
+        GameObject itemPrefab = Instantiate(itemData.prefab, heldItemTransform);
+        InventoryItem itemScript = itemPrefab.GetComponent<InventoryItem>();
+        itemScript.itemName = itemData.name;
+        items.Add(itemScript);
 
         InventoryUI.instance.UpdateInventoryHUD();
     }
 
     public void RemoveItemFromInventory(InventoryItem item)
     {
+        Destroy(item.gameObject);
+
         items.Remove(item);
 
         if (items.Any()

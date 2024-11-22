@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class InventoryItem : MonoBehaviour
 {
-
-    [SerializeField] string itemName;
+    public string itemName;
 
     public void Use()
     {
-
+        Debug.Log($"{itemName} has been used");
     }
 }

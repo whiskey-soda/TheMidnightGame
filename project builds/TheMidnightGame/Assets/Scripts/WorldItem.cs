@@ -4,13 +4,13 @@ using UnityEngine;
 public class WorldItem : InteractableProp
 {
     [Header("CONFIG")]
-    [SerializeField] InventoryItem inventoryItem;
+    [SerializeField] ItemData itemData;
 
 
     public override void ProcessInteraction()
     {
         //adds item to player inventory and destroys world version of the item
-        PlayerInventory.instance.AddItemToInventory(inventoryItem);
+        PlayerInventory.instance.AddItemToInventory(itemData);
         Destroy(transform.parent.gameObject);
     }
 

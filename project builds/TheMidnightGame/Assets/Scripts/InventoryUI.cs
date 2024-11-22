@@ -1,9 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    [Header("CONFIG")]
+    [SerializeField] GameObject HUDItemPrefab;
+
+    List<HUDItem> items = new List<HUDItem>();
 
     public static InventoryUI instance;
 
@@ -20,6 +26,21 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    public void UpdateEquippedItem()
+    {
+        //this code SUUUUCKS but i will update it later when we have the inventory visuals finalized
+        items.Clear();
+        items = GetComponentsInChildren<HUDItem>().ToList();
+
+        foreach (HUDItem item in items)
+        {
+            item.NoHighlight();
+        }
+
+        items[PlayerInventory.instance.currentSlotIndex].Highlight();
+    }
+
+
     public void UpdateInventoryHUD()
     {
         // clear hud
@@ -31,12 +52,15 @@ public class InventoryUI : MonoBehaviour
         // add hud element for all items
         foreach (InventoryItem item in PlayerInventory.instance.items)
         {
-            GameObject HUDItem = new GameObject();
-            HUDItem.name = $"{item.name} (HUD Item)";
-            HUDItem.transform.parent = transform;
-            TextMeshProUGUI text = HUDItem.AddComponent<TextMeshProUGUI>();
-            text.text = item.name;
+
+            GameObject newHUDItem = Instantiate(HUDItemPrefab, transform);
+            newHUDItem.name = $"{item.itemName} (HUD Item)";
+
+            HUDItem HUDItemScript = newHUDItem.GetComponent<HUDItem>();
+            HUDItemScript.SetText(item.itemName);
         }
+
+        UpdateEquippedItem();
     }
 
 }

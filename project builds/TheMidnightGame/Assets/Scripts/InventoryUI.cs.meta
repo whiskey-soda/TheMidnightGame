@@ -1,2 +1,12 @@
 fileFormatVersion: 2
 guid: a345254bfc26a1646a42dd4eb9afeb4f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - HUDItemPrefab: {fileID: 4812662480652317818, guid: 4c30594be358a094a8d65a6349fe9e32, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
