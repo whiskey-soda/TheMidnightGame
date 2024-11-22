@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HUDItem : MonoBehaviour
+public class UI_ItemController : MonoBehaviour
 {
     TextMeshProUGUI label;
     Image background;

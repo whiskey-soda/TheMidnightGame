@@ -9,7 +9,7 @@ public class InventoryUI : MonoBehaviour
     [Header("CONFIG")]
     [SerializeField] GameObject HUDItemPrefab;
 
-    List<HUDItem> items = new List<HUDItem>();
+    List<UI_ItemController> uiItems = new List<UI_ItemController>();
 
     public static InventoryUI instance;
 
@@ -29,12 +29,12 @@ public class InventoryUI : MonoBehaviour
     public void UpdateEquippedItem()
     {
 
-        foreach (HUDItem item in items)
+        foreach (UI_ItemController item in uiItems)
         {
             item.NoHighlight();
         }
 
-        items[PlayerInventory.instance.currentSlotIndex].Highlight();
+        uiItems[PlayerInventory.instance.currentSlotIndex].Highlight();
     }
 
 
@@ -46,7 +46,7 @@ public class InventoryUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        items.Clear();
+        uiItems.Clear();
 
         // creates + configures hud element for all items
         foreach (InventoryItem item in PlayerInventory.instance.items)
@@ -56,10 +56,11 @@ public class InventoryUI : MonoBehaviour
             uiItemObject.name = $"{item.itemName} (HUD Item)";
 
 
-            HUDItem HUDItemScript = uiItemObject.GetComponent<HUDItem>();
-            HUDItemScript.SetText(item.itemName);
+            // configure the ui element with the item info
+            UI_ItemController uiItemController = uiItemObject.GetComponent<UI_ItemController>();
+            uiItemController.SetText(item.itemName);
 
-            items.Add(HUDItemScript);
+            uiItems.Add(uiItemController);
         }
 
         UpdateEquippedItem();
