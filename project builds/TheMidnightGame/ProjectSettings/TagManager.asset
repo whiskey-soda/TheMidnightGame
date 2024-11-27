@@ -6,6 +6,9 @@ TagManager:
   tags:
   - CinemachineTarget
   - Interactable
+  - Room
+  - Floor
+  - Manager
   layers:
   - Default
   - TransparentFX
