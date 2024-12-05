@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 4678820272539741151}
   - component: {fileID: 8236069968861722262}
   - component: {fileID: 3677315793767090390}
+  - component: {fileID: 2248189235789907819}
   m_Layer: 0
   m_Name: Midnight Man
   m_TagString: Untagged
@@ -176,5 +177,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfe8028d4dedbc945993debe115b52a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2248189235789907819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8971945145479933099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35eb4cc466d779d4e981fecb2b0c4a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
