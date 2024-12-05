@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0afb71c8e1570d1498329946e6162c3b, type: 3}
   m_Name: Lighter
   m_EditorClassIdentifier: 
-  itemName: TEST ITEM
-  prefab: {fileID: 5960381037468794958, guid: b66ddee0c17972d48b89b302f7de17ec, type: 3}
+  itemName: LIGHTER
+  prefab: {fileID: 5960381037468794958, guid: ca6aa05ed72975347adddeeb7cec576b, type: 3}

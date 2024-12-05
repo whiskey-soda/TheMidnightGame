@@ -6,7 +6,7 @@ public class InventoryItem : MonoBehaviour
 
     GameObject geometry;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         geometry = GetComponentInChildren<MeshRenderer>(true).gameObject;
     }
@@ -16,12 +16,12 @@ public class InventoryItem : MonoBehaviour
         Debug.Log($"{itemName} has been used");
     }
 
-    public void Show()
+    public virtual void Show()
     {
         geometry.SetActive(true);
     }
 
-    public void Hide()
+    public virtual void Hide()
     {
         geometry.SetActive(false);
     }
