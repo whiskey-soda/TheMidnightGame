@@ -10,9 +10,9 @@ public class Door : InteractableProp
     Quaternion openAngle;
 
 
-    enum DoorState { open, closed, opening, closing }
+    public enum DoorState { open, closed, opening, closing }
 
-    DoorState doorState = DoorState.closed;
+    public DoorState doorState = DoorState.closed;
 
     protected override void Awake()
     {
