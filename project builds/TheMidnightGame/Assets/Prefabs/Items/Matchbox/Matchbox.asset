@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0afb71c8e1570d1498329946e6162c3b, type: 3}
+  m_Name: Matchbox
+  m_EditorClassIdentifier: 
+  itemName: MATCHES
+  prefab: {fileID: 5960381037468794958, guid: 65fbfddfd743c6b4d8753686640cd9a3, type: 3}
